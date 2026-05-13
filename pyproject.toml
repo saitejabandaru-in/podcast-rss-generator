@@ -1,0 +1,61 @@
+[build-system]
+requires = ["setuptools>=65.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "podcast-rss-generator"
+version = "1.0.0"
+description = "Convert podcast metadata from YAML to RSS 2.0 feeds compatible with Apple Podcasts, Spotify, and major podcast platforms."
+readme = "README.md"
+requires-python = ">=3.6"
+license = {text = "MIT"}
+authors = [
+    {name = "Sai Teja Bandaru", email = "contact@saitejabandaru.com"}
+]
+keywords = [
+    "podcast",
+    "rss",
+    "yaml",
+    "feed",
+    "apple-podcasts",
+    "spotify",
+    "podcast-distribution",
+    "itunes",
+    "automation"
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Content Creators",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Multimedia :: Sound/Audio",
+    "Topic :: Software Development :: Libraries",
+]
+
+dependencies = [
+    "pyyaml>=5.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/saitejabandaru-in/podcast-test"
+Repository = "https://github.com/saitejabandaru-in/podcast-test"
+Documentation = "https://github.com/saitejabandaru-in/podcast-test#readme"
+Issues = "https://github.com/saitejabandaru-in/podcast-test/issues"
+
+[project.scripts]
+podcast-rss-generator = "podcast_rss_generator.cli:main"
+
+[tool.setuptools]
+packages = ["podcast_rss_generator"]

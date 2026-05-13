@@ -1,0 +1,5 @@
+include README.md
+include LICENSE
+include feed.yaml
+include podcast_rss_generator/
+recursive-include podcast_rss_generator *.py
