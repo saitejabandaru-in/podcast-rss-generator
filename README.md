@@ -10,7 +10,9 @@
   <img src="https://img.shields.io/badge/Python-3.6+-blue?style=flat-square"/>
   <img src="https://img.shields.io/badge/Format-RSS%202.0-brightgreen?style=flat-square"/>
   <img src="https://img.shields.io/badge/iTunes-Compatible-red?style=flat-square"/>
+  <img src="https://img.shields.io/badge/PyPI-podcast--rss--generator-blue?style=flat-square"/>
   <img src="https://img.shields.io/badge/License-MIT-lightgrey?style=flat-square"/>
+  <img src="https://img.shields.io/badge/Status-Production%20Ready-success?style=flat-square"/>
 </p>
 
 ---
@@ -56,37 +58,86 @@ No more manual XML editing. No more broken podcast feeds. Just YAML + Python + R
 ---
 
 ## 🗂️ Project Structure
+rss-generator/
+├── podcast_rss_generator/      # 📦 Main package
+│   ├── __init__.py             # Package exports
+│   ├── generator.py            # Core RSS generation engine
+│   └── cli.py                  # Command-line interface
+│
+├── tests/                      # 🧪 Test suite
+│
+├── feed.yaml                   # 📋 Example config (you edit this)
+├── podcast.xml                 # 📡 Generated RSS feed (output)
+│
+├── pyproject.toml              # 🔧 Modern package config
+├── setup.py                    # 🔧 Traditional setup
+├── requirements.txt            # 📦 Production dependencies
+├── requirements-dev.txt        # 🛠️ Development dependencies
+│
+├── README.md                   # 📖 This file
+├── INSTALLATION.md             # 💾 Installation guide
+├── PACKAGE_DESCRIPTION.md      # 📝 Full package overview
+├── PYPI_PUBLISHING_GUIDE.md    # 🚀 How to publish to PyPI
+├── Option 1: Install from PyPI (Recommended)
 
+```bash
+pip install podcast-rss-generator
 ```
-podcast-test/
-├── feed.py             # Main script - YAML → XML conversion
-├── feed.yaml           # Podcast config & episodes (you edit this)
-├── podcast.xml         # Generated RSS feed (output)
-├── LICENSE             # MIT License
-└── README.md           # This file
+
+Then use the CLI:
+
+```bash
+podcast-rss-generator --input feed.yaml --output podcast.xml
 ```
 
-**What Each File Does:**
+### Option 2: Install from Source
 
-| File | Purpose | Editing |
-|------|---------|---------|
-| `feed.py` | Python script that reads YAML and generates RSS/XML | Not usually |
-| `feed.yaml` | Your podcast metadata & all episodes | ✏️ Edit this |
-| `podcast.xml` | Final RSS feed output | Auto-generated |
+```bash
+git clone https://github.com/saitejabandaru-in/podcast-test.git
+cd podcast-test
+pip install -e .
+```
 
----
-
-## 🚀 Quick Start
-
-### 1. Install Python Dependencies
+### Option 3: Run Locally
 
 ```bash
 pip install pyyaml
+python feed.py
 ```
 
-### 2. Edit Your Podcast Config
+---
 
-Open `feed.yaml` and update with your podcast details:
+## 💻 Usage
+
+### Command Line Interface
+
+```bash
+# Using default filenames (feed.yaml → podcast.xml)
+podcast-rss-generator
+
+# Custom input/output
+podcast-rss-generator --input my-podcast.yaml --output my-feed.xml
+
+# Show help
+podcast-rss-generator --help
+
+# Show version
+podcast-rss-generator --version
+```
+
+### Python API
+
+```python
+from podcast_rss_generator import generate_rss_feed
+
+# Generate RSS feed from YAML
+output_path = generate_rss_feed("feed.yaml", "podcast.xml")
+print(f"✅ Feed generated: {output_path}")
+```
+
+### Edit Your Podcast Config
+
+Edit `feed.yaml` with your podcast details:
 
 ```bash
 nano feed.yaml
@@ -100,23 +151,52 @@ nano feed.yaml
 - `image` - Path to podcast artwork
 - `item` - Add your episodes here
 
-### 3. Generate Your RSS Feed
+### Edit Your Podcast Config
 
-```bash
-python feed.py
+┌─────────────────────────────┐
+│  Install Package            │
+│  pip install                │
+│  podcast-rss-generator      │
+└──────────────┬──────────────┘
+               ↓
+    ┌──────────────────────┐
+    │ feed.yaml            │
+    │ (Your Config)        │
+    └──────────────┬───────┘
+                   ↓
+    ┌──────────────────────────────────┐
+    │ podcast_rss_generator.generator  │
+    │ ├─ Load YAML                     │
+    │ ├─ Parse Metadata                │
+    │ ├─ Create RSS Structure           │
+    │ ├─ Build Channel                 │
+    │ ├─ Process Episodes              │
+    │ └─ Write XML                     │
+    └──────────────┬────────────────────┘
+                   ↓
+    ┌──────────────────────────┐
+    │ podcast.xml              │
+    │ (RSS 2.0 Feed - Ready!)  │
+    └──────────────┬───────────┘
+                   ↓
+        ┌──────────┴──────────┐
+        ↓                     ↓
+    🎙️ Upload         📱 Submit to:
+    to Server         • Apple Podcasts
+                      • Spotify
+                      • Google Podcasts
+                      • All Directories
 ```
 
-### 4. Check the Output
+### Processing Steps
 
-Open `podcast.xml` - this is your RSS feed! Ready to:
-- ✅ Submit to Apple Podcasts
-- ✅ Submit to Spotify
-- ✅ Host on your website
-- ✅ Share anywhere
-
----
-
-## 📝 Configuration Guide
+1. **Load YAML** - Reads podcast config
+2. **Parse Metadata** - Extracts episodes & details
+3. **Create RSS** - Builds XML structure
+4. **Build Channel** - Adds podcast info
+5. **Process Episodes** - Adds all episodes with metadata
+6. **Write Feed** - Generates podcast.xml
+7. **Deploy** - Upload to server & submit📝 Configuration Guide
 
 ### Podcast Metadata (Top Level)
 
@@ -149,31 +229,54 @@ item:
 **Publication Date Format:** Must follow RFC 2822 (e.g., `Thu, 12 Jan 2023 18:00:00 GMT`)
 
 ---
+Professional Python packaging (PEP 517/518)  
+✔ CLI development with argparse  
+✔ YAML configuration management  
+✔ XML generation from structured data  
+✔ RSS/podcast standards knowledge  
+✔ iTunes integration and compatibility  
+✔ Clean, modular Python scripting  
+✔ Version-controlled feed distribution  
+✔ PyPI package publishing  
 
-## 🔧 System Workflow
-
-```text
-1. Load YAML Configuration
-   ↓
-2. Parse Podcast Metadata
-   ↓
+This is how **profession
 3. Create RSS Structure
    ├─ Add RSS 2.0 root element
    ├─ Add iTunes namespace
    └─ Add content namespace
    ↓
-4. Build Channel Section
-   ├─ Title, author, language
-   ├─ Description, artwork
-   ├─ Category, link
-   └─ Format
-   ↓
-5. Process Episodes
-   ├─ Iterate through items
-   ├─ Add episode metadata
-   ├─ Create audio enclosure
-   └─ Set publication date
-   ↓
+4*Runtime:**
+* Python 3.6+
+* PyYAML (dependency)
+* xml.etree.ElementTree (stdlib)
+
+**Development:**
+* setuptools (packaging)
+* pytest (testing)
+* black (formatting)
+* flake8 (linting)
+* twine (PyPI upload)
+
+---
+
+## 📋 Requirements
+
+- **Python:** 3.6 or higher
+- **Dependencies:** pyyaml (auto-installed with package)
+- **Workflow:** YAML config file + valid podcast metadata
+- **Hosting:** Audio files accessible from your base URL
+
+---
+
+## 📚 Documentation
+
+| Document | Purpose |
+|----------|---------|
+| **README.md** | Main guide & examples (this file) |
+| **INSTALLATION.md** | Setup instructions |
+| **PACKAGE_DESCRIPTION.md** | Full package overview |
+| **PYPI_PUBLISHING_GUIDE.md** | How to publish to PyPI |
+| **PROJECT_SUMMARY.md** | What was improved |
 6. Write podcast.xml
    ├─ UTF-8 encoding
    ├─ XML declaration
